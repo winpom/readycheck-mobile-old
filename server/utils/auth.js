@@ -19,7 +19,6 @@ class AuthenticationError extends GraphQLError {
   }
 }
 
-
 module.exports = {
   AuthenticationError,
   // function for our authenticated routes

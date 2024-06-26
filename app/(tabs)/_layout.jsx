@@ -1,9 +1,9 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { TabBarIcon } from '../navigation/TabBarIcon';
+import { Colors } from '../constants/Colors';
+import { useColorScheme } from '../hooks/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -28,34 +28,34 @@ export default function TabLayout() {
         options={{
           title: 'Active ReadyChecks',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'checkbox-active' : 'checkbox-active-outline'} color={color} />
+            <TabBarIcon name={focused ? 'checkmark-done' : 'checkmark-done-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="create"
         options={{
-          title: 'Create a New ReadyCheck',
+          title: 'New ReadyCheck',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'check' : 'check-outline'} color={color} />
+            <TabBarIcon name={focused ? 'checkmark-circle' : 'checkmark-circle-outline'} size={40} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="groups"
+        name="social"
         options={{
-          title: 'Groups',
+          title: 'Social',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'user-group' : 'user-group-outline'} color={color} />
+            <TabBarIcon name={focused ? 'chatbubbles' : 'chatbubbles-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="friends"
+        name="account"
         options={{
-          title: 'Friends List',
+          title: 'Account',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'user-friends' : 'user-friends-outline'} color={color} />
+            <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
           ),
         }}
       />
