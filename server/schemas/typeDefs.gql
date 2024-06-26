@@ -1,0 +1,138 @@
+const typeDefs = `
+  type User {
+    _id: ID
+    username: String
+    email: String
+    status: String
+    bio: String
+    friends: [User]
+    ownedReadyChecks: [ReadyCheck]
+    receivedReadyChecks: [ReadyCheck]
+  }
+
+  type RSVP {
+    user: User
+    reply: String
+  }
+
+  type ChatMessage {
+  _id: ID
+  user: User
+  content: String
+  timestamp: String
+}
+
+type ReadyCheck {
+  _id: ID!
+  owner: User
+  title: String
+  activity: String!
+  timing: String!
+  description: String
+  createdAt: String
+  invitees: [User]!
+  RSVPs: [RSVP]
+  chatMessages: [ChatMessage] 
+}
+
+input ReadyCheckInput {
+  title: String!
+  activity: String!
+  timing: String!
+  description: String
+  inviteeIds: [ID]
+  ownerId: ID
+}
+
+type Notification {
+  _id: ID!
+  type: String!
+  sender: User!
+  recipient: User!
+  readyCheck: ReadyCheck
+  createdAt: String!
+  read: Boolean!
+}
+
+type Auth {
+  token: ID!
+  user: User
+}
+
+type Query {
+  getUser(id: ID!): User
+  getUserByUsername(username: String!): User
+  getUsers: [User]
+  getReadyCheck(id: ID!): ReadyCheck
+  getFriends(userId: ID!): [User]
+  me: User
+  notifications(userId: ID!): [Notification]
+  readyChecks: [ReadyCheck]
+  readyCheck(_id: ID!): ReadyCheck
+}
+
+type Mutation {
+  createUser(
+    username: String!,
+    email: String!,
+    password: String!
+  ): Auth
+
+deleteUser (
+  _id: ID!
+): User
+
+  login(
+    email: String!,
+    password: String!
+  ): Auth
+
+  followFriend (
+    username: String!
+  ): User
+
+  unfollowFriend (
+    username: String!
+  ): User
+
+  createReadyCheck(
+    input: ReadyCheckInput!
+  ): ReadyCheck!
+
+  updateReadyCheck(
+    id: ID!,
+    title: String!,
+    activity: String,
+    timing: String!,
+    description: String
+  ): ReadyCheck
+
+  deleteReadyCheck(id: ID!): Boolean
+
+  updateUserStatus(
+    status: String!
+  ): User
+
+  updateUserBio(
+    bio: String!
+  ): User
+
+  deleteNotification(
+    notificationId: ID!
+  ): Notification
+
+  rsvpReadyCheck(
+    readyCheckId: String!,
+    userId: String!,
+    reply: String!
+  ): ReadyCheck
+
+  sendMessage(
+    readyCheckId: ID!, 
+    userId: ID!, 
+    content: String!
+  ): ReadyCheck
+}
+`;
+
+module.exports = typeDefs;
